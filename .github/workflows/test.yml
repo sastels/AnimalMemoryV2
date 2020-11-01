@@ -14,12 +14,6 @@ jobs:
         uses: actions/checkout@master
       - name: Run tests
         run: |
-          xcodebuild clean test \
-	  	     -workspace  AnimalMemoryV2.xcodeproj/project.xcworkspace \
-		     -scheme AnimalMemoryV2 \
-		     -destination "${destination}" \
-		     CODE_SIGN_IDENTITY="" \
-		     CODE_SIGNING_REQUIRED=NO \
-		     ONLY_ACTIVE_ARCH=NO
+          xcodebuild clean test -workspace  AnimalMemoryV2.xcodeproj/project.xcworkspace -scheme AnimalMemoryV2 -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
         env: 
          destination: ${{ matrix.destination }}
