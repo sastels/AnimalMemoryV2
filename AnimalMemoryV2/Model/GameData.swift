@@ -36,6 +36,8 @@ struct GameData {
 
   @discardableResult mutating func pressTile(_ tile: String) -> GuessState {
     guessSequence.append(tile)
+    
+    print("Guess: \(guessSequence)")
     if guessSequence.count < targetSequence.count {
       return GuessState.notDone
     }

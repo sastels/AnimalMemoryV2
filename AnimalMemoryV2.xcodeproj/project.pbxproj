@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		011A3EF9254F5C2900F145C2 /* AnimalMemoryV2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A3EF8254F5C2900F145C2 /* AnimalMemoryV2App.swift */; };
-		011A3EFB254F5C2900F145C2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A3EFA254F5C2900F145C2 /* ContentView.swift */; };
 		011A3EFD254F5C2A00F145C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011A3EFC254F5C2A00F145C2 /* Assets.xcassets */; };
 		011A3F00254F5C2A00F145C2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 011A3EFF254F5C2A00F145C2 /* Preview Assets.xcassets */; };
 		011A3F0B254F5C2A00F145C2 /* AnimalMemoryV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011A3F0A254F5C2A00F145C2 /* AnimalMemoryV2Tests.swift */; };
@@ -49,7 +48,6 @@
 /* Begin PBXFileReference section */
 		011A3EF5254F5C2900F145C2 /* AnimalMemoryV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnimalMemoryV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		011A3EF8254F5C2900F145C2 /* AnimalMemoryV2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalMemoryV2App.swift; sourceTree = "<group>"; };
-		011A3EFA254F5C2900F145C2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		011A3EFC254F5C2A00F145C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		011A3EFF254F5C2A00F145C2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		011A3F01254F5C2A00F145C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 			children = (
 				011A3F26254F5DF400F145C2 /* Model */,
 				011A3EF8254F5C2900F145C2 /* AnimalMemoryV2App.swift */,
-				011A3EFA254F5C2900F145C2 /* ContentView.swift */,
 				011A3EFC254F5C2A00F145C2 /* Assets.xcassets */,
 				011A3F01254F5C2A00F145C2 /* Info.plist */,
 				011A3EFE254F5C2A00F145C2 /* Preview Content */,
@@ -293,7 +290,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				011A3EFB254F5C2900F145C2 /* ContentView.swift in Sources */,
 				011A3F28254F5E0D00F145C2 /* TileData.swift in Sources */,
 				011A3F6225507E5400F145C2 /* Board.swift in Sources */,
 				011A3F5B25507BB100F145C2 /* Tile.swift in Sources */,

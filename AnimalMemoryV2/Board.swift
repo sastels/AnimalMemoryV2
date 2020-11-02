@@ -8,31 +8,46 @@
 import SwiftUI
 
 struct Board: View {
-  @State var game = GameData(["cat", "dog", "horse", "cow"])
+  @State var game: GameData
 
   var body: some View {
-    HStack {
-      Spacer()
-      Button(action: {
-        self.game.pressTile(game.tile[0].name)
-        self.game.tile[0].toggleState()
+    VStack(spacing: 32) {
+      HStack(spacing: 32) {
+        Button(action: {
+          self.game.pressTile(game.tile[0].name)
+          self.game.tile[0].toggleState()
       }) {
-        Tile(game.tile[0])
-      }
-      Spacer()
-      Button(action: {
-        self.game.pressTile(game.tile[1].name)
-        self.game.tile[1].toggleState()
+          Tile(game.tile[0])
+        }
+
+        Button(action: {
+          self.game.pressTile(game.tile[1].name)
+          self.game.tile[1].toggleState()
       }) {
-        Tile(game.tile[1])
+          Tile(game.tile[1])
+        }
       }
-      Spacer()
+
+      HStack(spacing: 32) {
+        Button(action: {
+          self.game.pressTile(game.tile[2].name)
+          self.game.tile[2].toggleState()
+        }) {
+          Tile(game.tile[2])
+        }
+        Button(action: {
+          self.game.pressTile(game.tile[3].name)
+          self.game.tile[3].toggleState()
+        }) {
+          Tile(game.tile[3])
+        }
+      }
     }
   }
 }
 
 struct Board_Previews: PreviewProvider {
   static var previews: some View {
-    Board()
+    Board(game:GameData(["cat", "dog", "horse", "cow"]))
   }
 }
