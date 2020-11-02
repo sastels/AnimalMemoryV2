@@ -19,4 +19,12 @@ struct TileData {
   init(_ name: String) {
     self.name = name
   }
+  
+  mutating func toggleState() {
+    if state == .up {
+      state = .down
+    } else {
+      state = .up
+    }
+  }
 }
