@@ -19,6 +19,7 @@ struct Game: View {
           Spacer()
           Button("Restart") {
             self.game.reset()
+            playTarget(self.game)
           }
           Spacer()
         }.font(.system(size: 32))
@@ -27,11 +28,6 @@ struct Game: View {
 
       }.padding(32)
   }
-  
-  func playTarget() {
-    
-  }
-  
 }
 
 struct Game_Previews: PreviewProvider {
