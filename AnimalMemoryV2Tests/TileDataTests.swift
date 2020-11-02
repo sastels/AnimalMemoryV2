@@ -1,5 +1,5 @@
 //
-//  TileTests.swift
+//  TileDataTests.swift
 //  AnimalMemoryV2Tests
 //
 //  Created by Stephen Astels on 2020-11-01.
@@ -7,7 +7,7 @@
 
 import XCTest
 
-class TileTests: XCTestCase {
+class TileDataTests: XCTestCase {
   override func setUpWithError() throws {
     // Put setup code here. This method is called before the invocation of each test method in the class.
   }
@@ -17,7 +17,7 @@ class TileTests: XCTestCase {
   }
 
   func testInit() {
-    let tile = Tile("test name")
+    let tile = TileData("test name")
     XCTAssertEqual(tile.name, "test name")
     XCTAssertEqual(tile.state, TileState.up)
   }

@@ -1,5 +1,5 @@
 //
-//  Tile.swift
+//  TileData.swift
 //  AnimalMemoryV2
 //
 //  Created by Stephen Astels on 2020-11-01.
@@ -12,7 +12,7 @@ enum TileState {
   case up
 }
 
-struct Tile {
+struct TileData {
   var name = ""
   var state = TileState.up
   
