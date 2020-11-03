@@ -19,11 +19,11 @@ class GameDataTests: XCTestCase {
   func testInit() throws {
     let expectedNames = ["a", "b", "c", "d"]
     let game = GameData(expectedNames)
-    let actualNames = ((0..<4).map { game.tile[$0].name }).sorted()
+    let actualNames = ((0..<4).map { game.tiles[$0].name }).sorted()
     
     XCTAssertEqual(game.maxScore, 0)
     XCTAssertEqual(game.targetSequence.count, 0)
-    XCTAssertEqual(game.tile.count, expectedNames.count)
+    XCTAssertEqual(game.tiles.count, expectedNames.count)
     XCTAssertEqual(actualNames, expectedNames)
   }
   
@@ -77,9 +77,10 @@ class GameDataTests: XCTestCase {
     var game = GameData(["a", "b", "c", "d"])
     game.incrementTarget()
     game.incrementTarget()
+    game.incrementTarget()
     game.pressTile("tile")
     game.reset()
-    XCTAssertEqual(game.targetSequence.count, 0)
+    XCTAssertEqual(game.targetSequence.count, 1)
     XCTAssertEqual(game.guessSequence.count, 0)
   }
 }

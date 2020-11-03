@@ -21,4 +21,13 @@ class TileDataTests: XCTestCase {
     XCTAssertEqual(tile.name, "test name")
     XCTAssertEqual(tile.state, TileState.up)
   }
+  
+  func testToggleState() {
+    var tile = TileData("test name")
+    tile.toggleState()
+    XCTAssertEqual(tile.state, TileState.down)
+    tile.toggleState()
+    XCTAssertEqual(tile.state, TileState.up)
+
+  }
 }

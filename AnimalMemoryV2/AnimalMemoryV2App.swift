@@ -11,7 +11,7 @@ import SwiftUI
 struct AnimalMemoryV2App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          Game()
         }
     }
 }

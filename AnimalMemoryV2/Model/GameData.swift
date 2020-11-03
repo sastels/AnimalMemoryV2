@@ -14,28 +14,33 @@ enum GuessState {
 }
 
 struct GameData {
-  var tile: [TileData] = []
+  var tiles: [TileData] = []
   var targetSequence: [String] = []
   var guessSequence: [String] = []
   var maxScore = 0
 
   init(_ name: [String]) {
     let randomizedName = name.shuffled()
-    self.tile = (0..<name.count).map { TileData(randomizedName[$0]) }
+    self.tiles = (0..<name.count).map { TileData(randomizedName[$0]) }
   }
 
   mutating func reset() {
     guessSequence = []
     targetSequence = []
+    incrementTarget()
   }
 
   mutating func incrementTarget() {
-    let tileNames = (0..<tile.count).map { tile[$0].name }
+    let tileNames = (0..<tiles.count).map { tiles[$0].name }
     targetSequence.append(tileNames.randomElement()!)
+
+    print("Target: \(targetSequence)")
   }
 
   @discardableResult mutating func pressTile(_ tile: String) -> GuessState {
     guessSequence.append(tile)
+
+    print("Guess: \(guessSequence)")
     if guessSequence.count < targetSequence.count {
       return GuessState.notDone
     }
@@ -44,5 +49,11 @@ struct GameData {
     } else {
       return GuessState.failed
     }
+  }
+
+  func tileFor(_ name: String) -> TileData {
+    tiles.filter { tile in
+      tile.name == name
+    }[0]
   }
 }
