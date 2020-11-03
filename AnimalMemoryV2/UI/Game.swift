@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Game: View {
   @State var game = GameData(["cat", "dog", "cow", "horse"])
-
+  
   var body: some View {
     return
       VStack(spacing: 32) {
@@ -17,8 +17,9 @@ struct Game: View {
           Spacer()
           Text("Best: \(game.maxScore)")
           Spacer()
-          Button("Restart") {
+          Button(game.targetSequence.count == 0 ? "Start" : "Restart") {
             self.game.reset()
+            self.game.incrementTarget()
             playTarget(self.game)
           }
           Spacer()

@@ -8,7 +8,8 @@
 import Foundation
 
 func playTarget(_ game: GameData) {
+  print("Target")
   for tile in game.targetSequence {
-    print("Tile: \(tile)")
+    print("\(tile)")
   }
 }

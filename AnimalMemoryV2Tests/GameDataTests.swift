@@ -25,6 +25,7 @@ class GameDataTests: XCTestCase {
     XCTAssertEqual(game.targetSequence.count, 0)
     XCTAssertEqual(game.tiles.count, expectedNames.count)
     XCTAssertEqual(actualNames, expectedNames)
+    XCTAssertEqual(game.gameState, GameState.notDone)
   }
   
   func testIncrementTarget() throws {
@@ -39,16 +40,16 @@ class GameDataTests: XCTestCase {
     var game = GameData(["a", "b", "c", "d"])
     game.incrementTarget()
     
-    let actualPressResult = game.pressTile(game.targetSequence[0])
-    XCTAssertEqual(actualPressResult, GuessState.success)
+    game.pressTile(game.targetSequence[0])
+    XCTAssertEqual(game.gameState, GameState.success)
   }
   
   func testPressTileLen1b() throws {
     var game = GameData(["a", "b", "c", "d"])
     game.incrementTarget()
     
-    let actualPressResult = game.pressTile("bad tile")
-    XCTAssertEqual(actualPressResult, GuessState.failed)
+    game.pressTile("bad tile")
+    XCTAssertEqual(game.gameState, GameState.failed)
   }
   
   func testPressTileLen2a() throws {
@@ -56,10 +57,10 @@ class GameDataTests: XCTestCase {
     game.incrementTarget()
     game.incrementTarget()
     
-    let actualPress1Result = game.pressTile(game.targetSequence[0])
-    XCTAssertEqual(actualPress1Result, GuessState.notDone)
-    let actualPress2Result = game.pressTile(game.targetSequence[1])
-    XCTAssertEqual(actualPress2Result, GuessState.success)
+    game.pressTile(game.targetSequence[0])
+    XCTAssertEqual(game.gameState, GameState.notDone)
+    game.pressTile(game.targetSequence[1])
+    XCTAssertEqual(game.gameState, GameState.success)
   }
   
   func testPressTileLen2b() throws {
@@ -67,10 +68,10 @@ class GameDataTests: XCTestCase {
     game.incrementTarget()
     game.incrementTarget()
     
-    let actualPress1Result = game.pressTile("guess1")
-    XCTAssertEqual(actualPress1Result, GuessState.notDone)
-    let actualPress2Result = game.pressTile("guess2")
-    XCTAssertEqual(actualPress2Result, GuessState.failed)
+    game.pressTile("guess1")
+    XCTAssertEqual(game.gameState, GameState.notDone)
+    game.pressTile("guess2")
+    XCTAssertEqual(game.gameState, GameState.failed)
   }
   
   func testReset() throws {
@@ -80,7 +81,19 @@ class GameDataTests: XCTestCase {
     game.incrementTarget()
     game.pressTile("tile")
     game.reset()
-    XCTAssertEqual(game.targetSequence.count, 1)
+    XCTAssertEqual(game.gameState, GameState.notDone)
+    XCTAssertEqual(game.targetSequence.count, 0)
     XCTAssertEqual(game.guessSequence.count, 0)
+  }
+  
+  func testResetGuess() throws {
+    var game = GameData(["a", "b", "c", "d"])
+    game.incrementTarget()
+    game.incrementTarget()
+    game.pressTile("tile")
+    game.resetGuess()
+    XCTAssertEqual(game.gameState, GameState.notDone)
+    XCTAssertEqual(game.guessSequence.count, 0)
+    XCTAssertEqual(game.targetSequence.count, 2)
   }
 }

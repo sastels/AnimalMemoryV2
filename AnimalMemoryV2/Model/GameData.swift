@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GuessState {
+enum GameState {
   case success
   case failed
   case notDone
@@ -18,6 +18,7 @@ struct GameData {
   var targetSequence: [String] = []
   var guessSequence: [String] = []
   var maxScore = 0
+  var gameState = GameState.notDone
 
   init(_ name: [String]) {
     let randomizedName = name.shuffled()
@@ -27,27 +28,33 @@ struct GameData {
   mutating func reset() {
     guessSequence = []
     targetSequence = []
-    incrementTarget()
+    gameState = .notDone
+  }
+
+  mutating func resetGuess() {
+    guessSequence = []
+    gameState = .notDone
   }
 
   mutating func incrementTarget() {
     let tileNames = (0..<tiles.count).map { tiles[$0].name }
     targetSequence.append(tileNames.randomElement()!)
-
-    print("Target: \(targetSequence)")
+    gameState = .notDone
   }
 
-  @discardableResult mutating func pressTile(_ tile: String) -> GuessState {
+  mutating func pressTile(_ tile: String) {
     guessSequence.append(tile)
 
     print("Guess: \(guessSequence)")
     if guessSequence.count < targetSequence.count {
-      return GuessState.notDone
-    }
-    if guessSequence.elementsEqual(targetSequence) {
-      return GuessState.success
+      gameState = .notDone
+    } else if guessSequence.elementsEqual(targetSequence) {
+      gameState = .success
+      if targetSequence.count > maxScore {
+        maxScore = targetSequence.count
+      }
     } else {
-      return GuessState.failed
+      gameState = .failed
     }
   }
 

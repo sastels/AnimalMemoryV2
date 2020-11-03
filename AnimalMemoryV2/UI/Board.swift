@@ -13,35 +13,36 @@ struct Board: View {
   var body: some View {
     VStack(spacing: 32) {
       HStack(spacing: 32) {
-        Button(action: {
-          self.game.pressTile(game.tiles[0].name)
-          self.game.tiles[0].toggleState()
-      }) {
-          Tile(game.tiles[0])
-        }
-
-        Button(action: {
-          self.game.pressTile(game.tiles[1].name)
-          self.game.tiles[1].toggleState()
-      }) {
-          Tile(game.tiles[1])
-        }
+        TileButton(game: $game, tile: $game.tiles[0])
+        TileButton(game: $game, tile: $game.tiles[1])
       }
-
       HStack(spacing: 32) {
-        Button(action: {
-          self.game.pressTile(game.tiles[2].name)
-          self.game.tiles[2].toggleState()
-        }) {
-          Tile(game.tiles[2])
-        }
-        Button(action: {
-          self.game.pressTile(game.tiles[3].name)
-          self.game.tiles[3].toggleState()
-        }) {
-          Tile(game.tiles[3])
-        }
+        TileButton(game: $game, tile: $game.tiles[2])
+        TileButton(game: $game, tile: $game.tiles[3])
       }
+    }
+  }
+}
+
+struct TileButton: View {
+  @Binding var game: GameData
+  @Binding var tile: TileData
+
+  var body: some View {
+    Button(action: {
+      self.game.pressTile(tile.name)
+      if self.game.gameState == .success {
+        print("Success!!")
+        self.game.incrementTarget()
+        self.game.resetGuess()
+        playTarget(self.game)
+      } else if self.game.gameState == .failed {
+        print("Failed!!")
+        self.game.resetGuess()
+        playTarget(self.game)
+      }
+  }) {
+      Tile(tile)
     }
   }
 }
