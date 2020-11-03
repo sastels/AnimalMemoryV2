@@ -17,9 +17,9 @@ struct Game: View {
           Spacer()
           Text("Best: \(game.maxScore)")
           Spacer()
-          Text("")
-          Button("Restart") {
+          Button(game.targetSequence.count == 0 ? "Start" : "Restart") {
             self.game.reset()
+            self.game.incrementTarget()
             playTarget(self.game)
           }
           Spacer()

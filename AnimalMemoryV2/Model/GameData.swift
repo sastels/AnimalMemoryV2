@@ -28,7 +28,11 @@ struct GameData {
   mutating func reset() {
     guessSequence = []
     targetSequence = []
-    incrementTarget()
+    gameState = .notDone
+  }
+
+  mutating func resetGuess() {
+    guessSequence = []
     gameState = .notDone
   }
 
@@ -36,7 +40,6 @@ struct GameData {
     let tileNames = (0..<tiles.count).map { tiles[$0].name }
     targetSequence.append(tileNames.randomElement()!)
     gameState = .notDone
-    print("Target: \(targetSequence)")
   }
 
   mutating func pressTile(_ tile: String) {
@@ -47,6 +50,9 @@ struct GameData {
       gameState = .notDone
     } else if guessSequence.elementsEqual(targetSequence) {
       gameState = .success
+      if targetSequence.count > maxScore {
+        maxScore = targetSequence.count
+      }
     } else {
       gameState = .failed
     }

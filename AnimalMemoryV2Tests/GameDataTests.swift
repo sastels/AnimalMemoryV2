@@ -82,7 +82,18 @@ class GameDataTests: XCTestCase {
     game.pressTile("tile")
     game.reset()
     XCTAssertEqual(game.gameState, GameState.notDone)
-    XCTAssertEqual(game.targetSequence.count, 1)
+    XCTAssertEqual(game.targetSequence.count, 0)
     XCTAssertEqual(game.guessSequence.count, 0)
+  }
+  
+  func testResetGuess() throws {
+    var game = GameData(["a", "b", "c", "d"])
+    game.incrementTarget()
+    game.incrementTarget()
+    game.pressTile("tile")
+    game.resetGuess()
+    XCTAssertEqual(game.gameState, GameState.notDone)
+    XCTAssertEqual(game.guessSequence.count, 0)
+    XCTAssertEqual(game.targetSequence.count, 2)
   }
 }

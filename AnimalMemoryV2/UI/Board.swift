@@ -31,7 +31,16 @@ struct TileButton: View {
   var body: some View {
     Button(action: {
       self.game.pressTile(tile.name)
-      tile.toggleState()
+      if self.game.gameState == .success {
+        print("Success!!")
+        self.game.incrementTarget()
+        self.game.resetGuess()
+        playTarget(self.game)
+      } else if self.game.gameState == .failed {
+        print("Failed!!")
+        self.game.resetGuess()
+        playTarget(self.game)
+      }
   }) {
       Tile(tile)
     }
