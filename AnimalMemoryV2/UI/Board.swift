@@ -9,16 +9,17 @@ import SwiftUI
 
 struct Board: View {
   @Binding var game: GameData
+  @Binding var inputDisabled: Bool
 
   var body: some View {
     VStack(spacing: 32) {
       HStack(spacing: 32) {
-        TileButton(color: .red, game: $game, tile: $game.tiles[0])
-        TileButton(color: .blue, game: $game, tile: $game.tiles[1])
+        TileButton(color: .red, game: $game, tile: $game.tiles[0], inputDisabled: $inputDisabled)
+        TileButton(color: .blue, game: $game, tile: $game.tiles[1], inputDisabled: $inputDisabled)
       }
       HStack(spacing: 32) {
-        TileButton(color: .green, game: $game, tile: $game.tiles[2])
-        TileButton(color: .purple, game: $game, tile: $game.tiles[3])
+        TileButton(color: .green, game: $game, tile: $game.tiles[2], inputDisabled: $inputDisabled)
+        TileButton(color: .purple, game: $game, tile: $game.tiles[3], inputDisabled: $inputDisabled)
       }
     }
   }
@@ -28,6 +29,7 @@ struct TileButton: View {
   var color: Color
   @Binding var game: GameData
   @Binding var tile: TileData
+  @Binding var inputDisabled: Bool
 
   var body: some View {
     Button(action: {
@@ -41,7 +43,7 @@ struct TileButton: View {
       }
   }) {
       Tile(tile, color: color)
-    }
+    }.disabled(inputDisabled)
   }
 
   func timerReset(_ delay: Double) {
@@ -52,8 +54,9 @@ struct TileButton: View {
 
   func playTarget(_ delayStart: Double) {
     var delay = delayStart
-
+    inputDisabled = true
     for tileIndex in 0..<game.targetSequence.count {
+      let tileIndexCopy = tileIndex
       let delayCopy = delay
       let name = game.targetSequence[tileIndex]
       Timer.scheduledTimer(withTimeInterval: delayCopy, repeats: false) { _ in
@@ -71,6 +74,9 @@ struct TileButton: View {
             game.tiles[i].toggleState()
           }
         }
+        if tileIndexCopy == game.targetSequence.count - 1 {
+          inputDisabled = false
+        }
       }
       delay += 0.2
     }
@@ -79,8 +85,9 @@ struct TileButton: View {
 
 struct Board_Previews: PreviewProvider {
   @State static var game = GameData(["cat", "dog", "horse", "cow"])
+  @State static var inputDisabled = false
 
   static var previews: some View {
-    Board(game: $game)
+    Board(game: $game, inputDisabled: $inputDisabled)
   }
 }
