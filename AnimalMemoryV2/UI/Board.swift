@@ -35,14 +35,43 @@ struct TileButton: View {
         print("Success!!")
         self.game.incrementTarget()
         self.game.resetGuess()
-        playTarget(self.game)
+        playTarget()
       } else if self.game.gameState == .failed {
         print("Failed!!")
         self.game.resetGuess()
-        playTarget(self.game)
+        playTarget()
       }
   }) {
       Tile(tile)
+    }
+  }
+
+  func playTarget() {
+    print("Target \(game.targetSequence)")
+    var delay = 0.0
+
+    for tileIndex in 0..<game.targetSequence.count {
+      var delayCopy = delay
+      let name = game.targetSequence[tileIndex]
+      Timer.scheduledTimer(withTimeInterval: delayCopy, repeats: false) { _ in
+        for i in 0..<game.tiles.count {
+          if game.tiles[i].name == name {
+            game.tiles[i].toggleState()
+          }
+        }
+        print("\(name) \(delayCopy) on")
+      }
+      delay += 1.0
+      delayCopy = delay
+      Timer.scheduledTimer(withTimeInterval: delayCopy, repeats: false) { _ in
+        for i in 0..<game.tiles.count {
+          if game.tiles[i].name == name {
+            game.tiles[i].toggleState()
+          }
+        }
+        print("\(name) \(delayCopy) off")
+      }
+      delay += 0.2
     }
   }
 }
