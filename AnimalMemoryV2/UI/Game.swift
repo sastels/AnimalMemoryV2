@@ -9,7 +9,8 @@ import SwiftUI
 
 struct Game: View {
   @State var game = GameData(["cat", "dog", "cow", "horse"])
-
+  @State var inputDisabled = false
+  
   var body: some View {
     return
       VStack(spacing: 32) {
@@ -35,7 +36,7 @@ struct Game: View {
         }.font(.system(size: 32))
 
         ZStack {
-          Board(game: $game)
+          Board(game: $game, inputDisabled: $inputDisabled)
           if game.gameState != .notDone {
             Text(game.gameState == .success ? "Good Job!" : "Try again!")
               .font(.system(size: 60))
@@ -51,8 +52,10 @@ struct Game: View {
 
   func playTarget() {
     var delay = 0.0
+    inputDisabled = true
 
     for tileIndex in 0..<game.targetSequence.count {
+      let tileIndexCopy = tileIndex
       var delayCopy = delay
       let name = game.targetSequence[tileIndex]
       Timer.scheduledTimer(withTimeInterval: delayCopy, repeats: false) { _ in
@@ -69,6 +72,9 @@ struct Game: View {
           if game.tiles[i].name == name {
             game.tiles[i].toggleState()
           }
+        }
+        if tileIndexCopy == game.targetSequence.count-1 {
+          inputDisabled = false
         }
       }
       delay += 0.2
