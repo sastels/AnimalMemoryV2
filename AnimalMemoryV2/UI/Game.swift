@@ -15,6 +15,14 @@ struct Game: View {
       VStack(spacing: 32) {
         HStack(spacing: 16) {
           Spacer()
+          Button(game.targetSequence.count == 0 ? "Start" : "Replay") {
+            if game.targetSequence.count == 0 {
+              self.game.reset()
+              self.game.incrementTarget()
+            }
+            playTarget()
+          }
+          Spacer()
           Text("Best: \(game.maxScore)")
           Spacer()
           Button(game.targetSequence.count == 0 ? "Start" : "Restart") {
