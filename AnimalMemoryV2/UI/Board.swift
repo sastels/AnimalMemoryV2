@@ -39,7 +39,6 @@ struct TileButton: View {
       } else if self.game.gameState == .failed {
         print("Failed!!")
         timerReset(2.0)
-        playTarget(2.0)
       }
   }) {
       Tile(tile)
@@ -58,7 +57,7 @@ struct TileButton: View {
     var delay = delayStart
 
     for tileIndex in 0..<game.targetSequence.count {
-      var delayCopy = delay
+      let delayCopy = delay
       let name = game.targetSequence[tileIndex]
       Timer.scheduledTimer(withTimeInterval: delayCopy, repeats: false) { _ in
         for i in 0..<game.tiles.count {
@@ -69,14 +68,14 @@ struct TileButton: View {
         print("\(name) \(delayCopy) on")
       }
       delay += 1.0
-      delayCopy = delay
-      Timer.scheduledTimer(withTimeInterval: delayCopy, repeats: false) { _ in
+      let delayCopy2 = delay
+      Timer.scheduledTimer(withTimeInterval: delayCopy2, repeats: false) { _ in
         for i in 0..<game.tiles.count {
           if game.tiles[i].name == name {
             game.tiles[i].toggleState()
           }
         }
-        print("\(name) \(delayCopy) off")
+        print("\(name) \(delayCopy2) off")
       }
       delay += 0.2
     }
