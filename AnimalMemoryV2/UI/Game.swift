@@ -9,35 +9,55 @@ import SwiftUI
 
 struct Game: View {
   @State var game = GameData(["cat", "dog", "cow", "horse"])
-  @State var inputDisabled = false
+  @State var inputDisabled = true
 
   var body: some View {
+    let initialBoot = game.targetSequence.count == 0
     return
       VStack(spacing: 32) {
         HStack(spacing: 16) {
           Spacer()
-          Button(game.targetSequence.count == 0 ? "Start" : "Replay") {
-            if game.targetSequence.count == 0 {
-              self.game.reset()
-              self.game.incrementTarget()
-            }
-            self.game.resetGuess()
-            playTarget()
-          }.disabled(inputDisabled).foregroundColor(.blue)
+          if !initialBoot {
+            Button("Replay") {
+              if game.targetSequence.count == 0 {
+                self.game.reset()
+                self.game.incrementTarget()
+              }
+              self.game.resetGuess()
+              playTarget()
+            }.disabled(inputDisabled).foregroundColor(.blue)
+          }
           Spacer()
           Text("Best: \(game.maxScore)")
           Spacer()
-          Button(game.targetSequence.count == 0 ? "Start" : "Restart") {
-            self.game.reset()
-            self.game.incrementTarget()
-            playTarget()
-          }.disabled(inputDisabled).foregroundColor(.blue)
-
+          if !initialBoot {
+            Button("Restart") {
+              self.game.reset()
+              self.game.incrementTarget()
+              playTarget()
+            }.disabled(inputDisabled).foregroundColor(.blue)
+          }
           Spacer()
         }.font(.system(size: 32))
 
         ZStack {
           Board(game: $game, inputDisabled: $inputDisabled)
+          if initialBoot {
+            Button(
+              action: {
+                self.game.incrementTarget()
+                playTarget()
+              })
+            {
+              Text("Start")
+                .font(.system(size: 60))
+                .foregroundColor(.blue)
+                .padding(50)
+                .frame(
+                  alignment: .center)
+                .background(RoundedRectangle(cornerRadius: 25).fill(Color.white).shadow(radius: 3))
+            }
+          }
           if game.gameState != .notDone {
             Text(game.gameState == .success ? "Good Job!" : "Try again!")
               .font(.system(size: 60))
