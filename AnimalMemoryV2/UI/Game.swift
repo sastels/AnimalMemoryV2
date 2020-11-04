@@ -33,8 +33,18 @@ struct Game: View {
           Spacer()
         }.font(.system(size: 32))
 
-        Board(game: $game)
-
+        ZStack {
+          Board(game: $game)
+          if game.gameState != .notDone {
+            Text(game.gameState == .success ? "Good Job!" : "Try again!")
+              .font(.system(size: 60))
+              .foregroundColor(.black)
+              .padding(50)
+              .frame(
+                alignment: .center)
+              .background(RoundedRectangle(cornerRadius: 25).fill(Color.blue.opacity(0.1)).shadow(radius: 3))
+          }
+        }
       }.padding(32)
   }
 
