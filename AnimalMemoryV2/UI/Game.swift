@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Game: View {
   @State var game = GameData(["cat", "dog", "cow", "horse"])
-  
+
   var body: some View {
     return
       VStack(spacing: 32) {
@@ -29,11 +29,11 @@ struct Game: View {
 
       }.padding(32)
   }
-  
+
   func playTarget() {
     print("Target \(game.targetSequence)")
     var delay = 0.0
-    
+
     for tileIndex in 0..<game.targetSequence.count {
       var delayCopy = delay
       let name = game.targetSequence[tileIndex]
