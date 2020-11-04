@@ -39,7 +39,6 @@ struct GameData {
   mutating func incrementTarget() {
     let tileNames = (0..<tiles.count).map { tiles[$0].name }
     targetSequence.append(tileNames.randomElement()!)
-    gameState = .notDone
   }
 
   mutating func pressTile(_ tile: String) {
