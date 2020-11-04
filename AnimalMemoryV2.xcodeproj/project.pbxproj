@@ -117,7 +117,6 @@
 		011A3EF7254F5C2900F145C2 /* AnimalMemoryV2 */ = {
 			isa = PBXGroup;
 			children = (
-				011A3F762550A75100F145C2 /* Utils */,
 				011A3F26254F5DF400F145C2 /* Model */,
 				011A3F6B25509F2400F145C2 /* UI */,
 				011A3EF8254F5C2900F145C2 /* AnimalMemoryV2App.swift */,
@@ -173,13 +172,6 @@
 				011A3F6C25509F4200F145C2 /* Game.swift */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		011A3F762550A75100F145C2 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

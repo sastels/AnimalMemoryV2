@@ -9,13 +9,15 @@ import SwiftUI
 
 struct Tile: View {
   var data: TileData
+  var color: Color
 
-  init(_ tileData: TileData) {
+  init(_ tileData: TileData, color: Color) {
     data = tileData
+    self.color = color
   }
 
   var body: some View {
-    let backgroundColor: Color = data.state == TileState.up ? .white : Color.blue.opacity(0.5)
+    let backgroundColor: Color = data.state == TileState.up ? color.opacity(0.9) : color.opacity(0.3)
 
     return
       Text(data.name)
@@ -32,6 +34,6 @@ struct Tile: View {
 
 struct Tile_Previews: PreviewProvider {
   static var previews: some View {
-    Tile(TileData("cat"))
+    Tile(TileData("cat"), color: Color.red)
   }
 }
