@@ -10,7 +10,7 @@ import SwiftUI
 struct Game: View {
   @State var game = GameData(["cat", "dog", "cow", "horse"])
   @State var inputDisabled = false
-  
+
   var body: some View {
     return
       VStack(spacing: 32) {
@@ -23,7 +23,7 @@ struct Game: View {
             }
             self.game.resetGuess()
             playTarget()
-          }
+          }.disabled(inputDisabled).foregroundColor(.blue)
           Spacer()
           Text("Best: \(game.maxScore)")
           Spacer()
@@ -31,7 +31,8 @@ struct Game: View {
             self.game.reset()
             self.game.incrementTarget()
             playTarget()
-          }
+          }.disabled(inputDisabled).foregroundColor(.blue)
+
           Spacer()
         }.font(.system(size: 32))
 
@@ -73,7 +74,7 @@ struct Game: View {
             game.tiles[i].toggleState()
           }
         }
-        if tileIndexCopy == game.targetSequence.count-1 {
+        if tileIndexCopy == game.targetSequence.count - 1 {
           inputDisabled = false
         }
       }

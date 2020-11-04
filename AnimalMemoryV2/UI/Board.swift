@@ -74,7 +74,7 @@ struct TileButton: View {
             game.tiles[i].toggleState()
           }
         }
-        if tileIndexCopy == game.targetSequence.count-1 {
+        if tileIndexCopy == game.targetSequence.count - 1 {
           inputDisabled = false
         }
       }
