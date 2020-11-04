@@ -20,6 +20,7 @@ struct Game: View {
               self.game.reset()
               self.game.incrementTarget()
             }
+            self.game.resetGuess()
             playTarget()
           }
           Spacer()
@@ -42,14 +43,13 @@ struct Game: View {
               .padding(50)
               .frame(
                 alignment: .center)
-              .background(RoundedRectangle(cornerRadius: 25).fill(Color.blue.opacity(0.1)).shadow(radius: 3))
+              .background(RoundedRectangle(cornerRadius: 25).fill(Color.white).shadow(radius: 3))
           }
         }
       }.padding(32)
   }
 
   func playTarget() {
-    print("Target \(game.targetSequence)")
     var delay = 0.0
 
     for tileIndex in 0..<game.targetSequence.count {
@@ -61,7 +61,6 @@ struct Game: View {
             game.tiles[i].toggleState()
           }
         }
-        print("\(name) \(delayCopy) on")
       }
       delay += 1.0
       delayCopy = delay
@@ -71,7 +70,6 @@ struct Game: View {
             game.tiles[i].toggleState()
           }
         }
-        print("\(name) \(delayCopy) off")
       }
       delay += 0.2
     }
