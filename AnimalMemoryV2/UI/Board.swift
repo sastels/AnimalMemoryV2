@@ -35,11 +35,11 @@ struct TileButton: View {
         print("Success!!")
         self.game.incrementTarget()
         self.game.resetGuess()
-        playTarget(self.game)
+//        playTarget(&self.game)
       } else if self.game.gameState == .failed {
         print("Failed!!")
         self.game.resetGuess()
-        playTarget(self.game)
+//        playTarget(&self.game)
       }
   }) {
       Tile(tile)

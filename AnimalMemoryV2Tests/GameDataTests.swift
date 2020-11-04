@@ -28,6 +28,11 @@ class GameDataTests: XCTestCase {
     XCTAssertEqual(game.gameState, GameState.notDone)
   }
   
+  func testTileFor() throws {
+    let game = GameData(["a", "b", "c", "d"])
+    XCTAssertEqual(game.tileFor("c").name, "c")
+  }
+  
   func testIncrementTarget() throws {
     var game = GameData(["a", "b", "c", "d"])
     game.incrementTarget()
